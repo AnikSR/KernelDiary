@@ -1,0 +1,55 @@
+Note: This is documented in 31st July, 2021. So, a lot of things are forgotten.
+
+1. Packages needed to install in the mother linux for configuring or install the new
+kernel:
+	- aptitude (libssl-dev was installed using aptitude)
+	- libssl-dev
+	- libncurses-dev (to run menuconfig)
+
+2. menuconfig is amazing, to learn and to configure. Hope to have many adventures with
+   it.
+
+3. "make defconfig" makes the config file with all default configuration. How to compile
+   all the specific non-default config option to a single file and make the .config with
+   specific alteration using a single command like "defconfig" is to be investigated.
+
+4. Documentation of the configured kernel was created using "make pdfdocs" as instructed
+   in the README file of the downloaded kernel. But building the documentation requires
+   "graphviz" and "dlophin" packages.
+
+5. bzImage is located in the "arch/x86/boot" file. Its no longer "arch/i386".
+
+6. grub is configured by editing the "/etc/default/grub" file. A good, simple overview
+   on grub configuration is found in the info file of the grub, using the command:
+   		
+		info -f grub -n 'Simple configuration'
+
+7. Fun fact: 'GRUB_TIMEOUT_STYLE' variable controls whether the boot menu will showup or
+   not. 'GRUP_TIMEOUT' holds the value of how long the boot menu will wait for me.
+
+8. However, main suggested (at Ask Ubuntu) edits are changing 'GRUB_DEFAULT' variable to
+   "saved" (default value is 0) and GRUB_SAVEDEFAULT=true. GRUB_DEFAULT variable selects
+   which kernel is the default kernle and GRUB_SAVEDEFAULT allows choosing the default
+   kernel on boot manu - as far I understood. I haven't implemented these suggestion,
+   since the new kernel has been automatically selected to be the default kernle upon
+   installation (#make install). Other kernels are available in the advanced option at
+   the boot menu.
+
+9. The new kernel 5.13.6 takes quiet a while to load. While the OS is being loaded, an
+   error message show up saying: Wrong EFI signature type. The installation definitely
+   left a lot of rough edges, smooting those will come in the following days.
+
+11. The new kernel is unable to connect to the host computer, which is normal since I
+	haven't installed guest addition to this kernel. The error tells that the system
+	can't identify the filesystem "vboxsf". Guest addition was installed with:
+
+		$sudo apt install virtualbox-guest-x11
+	
+	But mouting failed with the error:
+
+		sbin/mount.vboxsf: mounting failed with the error: No such device
+
+	Unfortunately rebooting didn't fix the problem.
+
+Todays tasks are done from the book "Linux Kernel in a nutshell". The book is old and a
+lot of stuff do not match. But its still a pure gold.
