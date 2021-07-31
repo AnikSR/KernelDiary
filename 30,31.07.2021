@@ -36,7 +36,7 @@ kernel:
    the boot menu.
 
 9. The new kernel 5.13.6 takes quiet a while to load. While the OS is being loaded, an
-   error message show up saying: Wrong EFI signature type. The installation definitely
+   error message show up saying: Wrong EFI loading signature. The installation definitely
    left a lot of rough edges, smooting those will come in the following days.
 
 11. The new kernel is unable to connect to the host computer, which is normal since I
@@ -50,6 +50,8 @@ kernel:
 		sbin/mount.vboxsf: mounting failed with the error: No such device
 
 	Unfortunately rebooting didn't fix the problem.
+
+12. Older kernels 5.8.63 and 5.8.25 are going black after the login!
 
 Todays tasks are done from the book "Linux Kernel in a nutshell". The book is old and a
 lot of stuff do not match. But its still a pure gold.
