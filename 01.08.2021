@@ -6,9 +6,22 @@ I. From "The Art of Linux Kernle Design"
         IP: 0x0000
         Thus, CS:IP = 0xFFFF0
    So, when the power button is pressed, something in the motherboard sets CS and IP register like this, which initiates the start-up sequence.
+
 3. The BIOS in question here only 8Kb in size, spanning 0xFE000-0xFFFF0 in address space.
+
 4. After CPU got the BIOS, the interrupt vector table is built and interrupt service routine is executed. The user sees the motherboard maneufacturer's
    logo and related stuffs in the start screen at this time.
+
 5. At startup, All x86 CPU uses only 1Mb memory in RAM, from 0x00000 to 0xFFFFF.
-6. The interrupt vector table is put in the first 1Kb: 0x00000 to 0x003FF.
-7. Some breakdown: 0x003FF is 0000 0000 0011 1111 1111 in binary. So 10 digis of 1 = 2^10 = 1024
+
+6. The interrupt vector table is put in the first 1Kb: 0x00000 to 0x003FF. Then comes BIOS data area, which spans 256B from 0x00400 to 0x004FF. After
+   this comes a ~56Kb empty space after which, from 0x0E05B to 0x0FFFE ~8Kb is the interrupt service routine.
+
+7. Some breakdown: 0x003FF is 0000 0000 0011 1111 1111 in binary. So 10 digis of 1 = 2^10 = 1024. 256 = 0x100,  0x3FF + 0x100 = 0x4FF.
+
+8. However, the numbers given in the book is a bit off after this. 56Kb = 56*1024 = 0xE000 and 0x004FF + 0x0E000 = 0x0E4FF which is 1188 bytes
+   ahead of the given starting address of the interrupt service routine. 8Kb (=8*1024 = 0x2000) after that puts the interrupt service routine end
+   in 0x0E4FF + 0x2000 = 0x104FF which is 501 bits ahead of what documented in the book.
+
+9. The interrupt vector table has 256 interrupt vectors, each vector is coded in 4 bytes: 2 most significant bytes indicating CS register's value,
+   2 least significant bytes indicating the value of IP register.
