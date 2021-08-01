@@ -25,7 +25,12 @@ kernel:
 		info -f grub -n 'Simple configuration'
 
 7. Fun fact: 'GRUB_TIMEOUT_STYLE' variable controls whether the boot menu will showup or
-   not. 'GRUP_TIMEOUT' holds the value of how long the boot menu will wait for me.
+   not. 'GRUP_TIMEOUT' holds the value of how long the boot menu will wait for me. These
+   changes in grub configuration can be saved using the command:
+   
+   		$ sudo update-grub
+
+   Only after this, the changes will take effect.
 
 8. However, main suggested (at Ask Ubuntu) edits are changing 'GRUB_DEFAULT' variable to
    "saved" (default value is 0) and GRUB_SAVEDEFAULT=true. GRUB_DEFAULT variable selects
@@ -40,16 +45,16 @@ kernel:
    left a lot of rough edges, smooting those will come in the following days.
 
 11. The new kernel is unable to connect to the host computer, which is normal since I
-	haven't installed guest addition to this kernel. The error tells that the system
-	can't identify the filesystem "vboxsf". Guest addition was installed with:
+    haven't installed guest addition to this kernel. The error tells that the system
+    can't identify the filesystem "vboxsf". Guest addition was installed with:
 
 		$sudo apt install virtualbox-guest-x11
 	
-	But mouting failed with the error:
+    But mouting failed with the error:
 
 		sbin/mount.vboxsf: mounting failed with the error: No such device
-
-	Unfortunately rebooting didn't fix the problem.
+    
+    Unfortunately rebooting didn't fix the problem.
 
 12. Older kernels 5.8.63 and 5.8.25 are going black after the login!
 
