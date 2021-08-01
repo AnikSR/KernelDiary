@@ -1,5 +1,5 @@
-I. From "The Art of Linux Kernle Design"
-========================================
+From "The Art of Linux Kernle Design"
+=====================================
 1. All x86 CPU work in 16-bit real mode at start-up.
 2. At start-up:
         CS: 0xFFFF
